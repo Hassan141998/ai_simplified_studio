@@ -4,11 +4,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from .api import router
 from .models import init_db
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI(title="AI Simplified Studio API")
 
 # CORS
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:5173")
 origins = [
+    frontend_url,
     "http://localhost:5173",
     "http://localhost:3000",
 ]
