@@ -14,4 +14,8 @@ os.environ['DATABASE_URL'] = 'postgresql://postgres.zgfuyimbfnyptosvkkrt:796096@
 os.environ['FRONTEND_URL'] = 'http://localhost:5173'  # Update after deploying frontend
 
 # Import your FastAPI app
-from app.main import app as application
+from app.main import app as asgi_app
+from a2wsgi import ASGIMiddleware
+
+# Wrap the ASGI app as a WSGI app (ASGI to WSGI)
+application = ASGIMiddleware(asgi_app)
